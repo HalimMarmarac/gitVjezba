@@ -1,19 +1,18 @@
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
-public class Kalkulator extends JFrame implements ActionListener {
+public class calc extends JFrame implements ActionListener {
 	JButton bt[];
-	String natp[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", "C", "+", "-", "*", "/", "sqrt", "="};
+	String natp[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", "C", "+", "-", "*", "/", "sqrt", "=" };
 	char op;
 	double rez;
 
 	JTextField jtf;
 	JLabel jlab;
 
-	public Kalkulator() {
+	public calc() {
 		super("Kalkulator");
 		rez = 0;
 		op = '+';
@@ -29,8 +28,8 @@ public class Kalkulator extends JFrame implements ActionListener {
 		for (int k = 0; k < natp.length; k++) {
 			bt[k] = new JButton(natp[k]);
 			bt[k].addActionListener(this);
-			//bt[k].setBackground(Color.BLACK);
-		   // bt[k].setForeground(Color.WHITE);
+			// bt[k].setBackground(Color.BLACK);
+			// bt[k].setForeground(Color.WHITE);
 			jp.add(bt[k]);
 		}
 		bt[natp.length - 1].setForeground(Color.red);
@@ -56,8 +55,9 @@ public class Kalkulator extends JFrame implements ActionListener {
 			jtf.setText(text);
 			bt[k].setEnabled(false);
 		}
-		//ubaciti mnozenje i dijljenje
-		if (bt[k].getText().equals("+") || bt[k].getText().equals("-") || bt[k].getText().equals("=")) {
+		// ubaciti mnozenje i dijljenje
+		if (bt[k].getText().equals("+") || bt[k].getText().equals("-") || bt[k].getText().equals("=")
+				|| bt[k].getText().equals("*") || bt[k].getText().equals("/")) {
 			double pod = Double.parseDouble(jtf.getText());
 			switch (op) {
 			case '+':
@@ -66,8 +66,14 @@ public class Kalkulator extends JFrame implements ActionListener {
 			case '-':
 				rez -= pod;
 				break;
-				//ubaciti casove za mnozenje i djeljenje
-				
+			case '*':
+				rez *=  pod;
+				break;
+			case '/':
+				rez /= pod;
+				break;
+			// ubaciti casove za mnozenje i djeljenje
+
 			}
 			op = bt[k].getText().charAt(0);
 			jtf.setText("");
@@ -82,14 +88,14 @@ public class Kalkulator extends JFrame implements ActionListener {
 			jlab.setText("");
 			return;
 		}
-		//ubaciti za sqrt i za kvadrat ifove
+		// ubaciti za sqrt i za kvadrat ifove
 	}
 
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
-		Kalkulator k = new Kalkulator();
+		calc k = new calc();
 		k.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		k.show(true);
+		k.setVisible(true);
 	}
 
 }
