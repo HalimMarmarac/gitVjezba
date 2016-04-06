@@ -1,13 +1,17 @@
-package Zadaæa17;
+package misc;
+
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class Kalkulator extends JFrame implements ActionListener {
+	
 	JButton bt[];
-	String natp[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", "C", "+", "-", "*", "/", "sqrt", "="};
+	String natp[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", "sqrt", "+", "-", "*", "/", "kva", "="};
+	
 	char op;
 	double rez;
 
@@ -30,8 +34,6 @@ public class Kalkulator extends JFrame implements ActionListener {
 		for (int k = 0; k < natp.length; k++) {
 			bt[k] = new JButton(natp[k]);
 			bt[k].addActionListener(this);
-			//bt[k].setBackground(Color.BLACK);
-		   // bt[k].setForeground(Color.WHITE);
 			jp.add(bt[k]);
 		}
 		bt[natp.length - 1].setForeground(Color.red);
@@ -57,7 +59,7 @@ public class Kalkulator extends JFrame implements ActionListener {
 			jtf.setText(text);
 			bt[k].setEnabled(false);
 		}
-		//ubaciti mnozenje i dijljenje
+		
 		if (bt[k].getText().equals("+") || bt[k].getText().equals("-") || bt[k].getText().equals("=")) {
 			double pod = Double.parseDouble(jtf.getText());
 			switch (op) {
@@ -76,14 +78,35 @@ public class Kalkulator extends JFrame implements ActionListener {
 			jlab.setText(Double.toString(rez));
 			return;
 		}
-		if (bt[k].getText().equals("C")) {
-			rez = 0.0;
-			op = '+';
-			jtf.setText("");
-			jlab.setText("");
+		if (bt[k].getText().equals("sqrt")) {
+			try{
+				String textToBroj = jtf.getText();
+				rez = Double.parseDouble(textToBroj);
+				rez = Math.sqrt(rez);
+				jtf.setText("");
+				jlab.setText(Double.toString(rez));
+				
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			
 			return;
 		}
-		//ubaciti za sqrt i za kvadrat ifove
+		if (bt[k].getText().equals("kva")) {
+			try{
+				String textToBroj = jtf.getText();
+				rez = Double.parseDouble(textToBroj);
+				rez = Math.pow(rez,2);
+				jtf.setText("");
+				jlab.setText(Double.toString(rez));
+				
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			
+			return;
+		}
+	
 	}
 
 	@SuppressWarnings("deprecation")
@@ -92,5 +115,9 @@ public class Kalkulator extends JFrame implements ActionListener {
 		k.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		k.show(true);
 	}
+	
+	
+	
+	
 
 }
